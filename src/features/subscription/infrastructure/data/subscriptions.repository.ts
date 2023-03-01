@@ -4,6 +4,16 @@ import { ISubscriptionRepository, IValidSubscription } from './ISubscription.rep
 import { SubscriptionType } from '@prisma/client';
 
 export class SubscriptionRepository implements ISubscriptionRepository {
+    findUserSubscription(userId: string): Promise<ISubscription | null> {
+        return db.subscription.findFirst({
+            where: {
+                userId,
+                AND: {
+                    isActive: true
+                }
+            }
+        })
+    }
 
     async checkActiveSubscription(userId: string): Promise<IValidSubscription | null> {
         return db.subscription.findFirst({

@@ -8,4 +8,5 @@ export interface IValidSubscription {
 export interface ISubscriptionRepository extends IBaseRepository<CreateSubscriptionDto, ISubscription> {
     checkActiveSubscription(userId: string): Promise<IValidSubscription | null>
     findByType(type: SubscriptionType): Promise<ISubscription | null>;
+    findUserSubscription(userId: string): Promise<ISubscription | null>
 }
